@@ -115,6 +115,30 @@ document.querySelectorAll('.price-card').forEach((card, index) => {
     observer.observe(card);
 });
 
+// Observe stat cards
+document.querySelectorAll('.stat-card').forEach((card, index) => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(30px)';
+    card.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+    observer.observe(card);
+});
+
+// Observe testimonial cards
+document.querySelectorAll('.testimonial-card').forEach((card, index) => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(30px)';
+    card.style.transition = `opacity 0.6s ease ${index * 0.15}s, transform 0.6s ease ${index * 0.15}s`;
+    observer.observe(card);
+});
+
+// Observe showcase cards
+document.querySelectorAll('.showcase-card').forEach((card, index) => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(40px)';
+    card.style.transition = `opacity 0.7s ease ${index * 0.2}s, transform 0.7s ease ${index * 0.2}s`;
+    observer.observe(card);
+});
+
 // ===================================
 // Parallax Effect for Hero Visual
 // ===================================
