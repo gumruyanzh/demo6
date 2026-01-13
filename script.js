@@ -1,0 +1,339 @@
+/**
+ * InkSync Pro - Premium Interactions
+ * Apple-inspired smooth animations and user experience
+ */
+
+// ===================================
+// Smooth Scroll Navigation
+// ===================================
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            const offset = 48; // Navigation height
+            const targetPosition = target.offsetTop - offset;
+
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+
+            // Close mobile menu if open
+            const navMenu = document.querySelector('.nav-menu');
+            navMenu.classList.remove('active');
+        }
+    });
+});
+
+// ===================================
+// Mobile Navigation Toggle
+// ===================================
+
+const navToggle = document.querySelector('.nav-toggle');
+const navMenu = document.querySelector('.nav-menu');
+
+navToggle.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+
+    // Animate toggle button
+    const spans = navToggle.querySelectorAll('span');
+    if (navMenu.classList.contains('active')) {
+        spans[0].style.transform = 'rotate(45deg) translateY(7px)';
+        spans[1].style.opacity = '0';
+        spans[2].style.transform = 'rotate(-45deg) translateY(-7px)';
+    } else {
+        spans[0].style.transform = '';
+        spans[1].style.opacity = '';
+        spans[2].style.transform = '';
+    }
+});
+
+// Close menu when clicking outside
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.nav-container')) {
+        navMenu.classList.remove('active');
+        const spans = navToggle.querySelectorAll('span');
+        spans[0].style.transform = '';
+        spans[1].style.opacity = '';
+        spans[2].style.transform = '';
+    }
+});
+
+// ===================================
+// Scroll-Based Navigation Effects
+// ===================================
+
+let lastScroll = 0;
+const nav = document.querySelector('.nav');
+
+window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+
+    // Add shadow on scroll
+    if (currentScroll > 10) {
+        nav.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.08)';
+    } else {
+        nav.style.boxShadow = '';
+    }
+
+    lastScroll = currentScroll;
+});
+
+// ===================================
+// Intersection Observer for Animations
+// ===================================
+
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, observerOptions);
+
+// Observe feature cards
+document.querySelectorAll('.feature-card').forEach((card, index) => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(30px)';
+    card.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+    observer.observe(card);
+});
+
+// Observe price cards
+document.querySelectorAll('.price-card').forEach((card, index) => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(30px)';
+    card.style.transition = `opacity 0.6s ease ${index * 0.15}s, transform 0.6s ease ${index * 0.15}s`;
+    observer.observe(card);
+});
+
+// ===================================
+// Parallax Effect for Hero Visual
+// ===================================
+
+window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const parallaxElements = document.querySelectorAll('.floating-device');
+
+    parallaxElements.forEach((element, index) => {
+        const speed = 0.1 + (index * 0.05);
+        element.style.transform = `translateY(${scrolled * speed}px)`;
+    });
+});
+
+// ===================================
+// Contact Form Handling
+// ===================================
+
+const contactForm = document.querySelector('.contact-form');
+
+contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const email = contactForm.querySelector('input[type="email"]').value;
+    const button = contactForm.querySelector('button');
+    const originalText = button.textContent;
+
+    // Simulate form submission
+    button.textContent = 'Starting...';
+    button.disabled = true;
+
+    setTimeout(() => {
+        button.textContent = '✓ Success!';
+        button.style.background = '#28a745';
+
+        setTimeout(() => {
+            button.textContent = originalText;
+            button.disabled = false;
+            button.style.background = '';
+            contactForm.reset();
+        }, 2000);
+    }, 1500);
+
+    // In production, you would send this to your backend
+    console.log('Form submitted with email:', email);
+});
+
+// ===================================
+// Smooth Reveal for Technology Section
+// ===================================
+
+const techSection = document.querySelector('.technology');
+const techObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const nodes = entry.target.querySelectorAll('.tech-node');
+            nodes.forEach((node, index) => {
+                setTimeout(() => {
+                    node.style.opacity = '1';
+                    node.style.transform = 'scale(1)';
+                }, index * 200);
+            });
+        }
+    });
+}, { threshold: 0.3 });
+
+if (techSection) {
+    // Set initial state
+    document.querySelectorAll('.tech-node').forEach(node => {
+        node.style.opacity = '0';
+        node.style.transform = 'scale(0)';
+        node.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    });
+
+    techObserver.observe(techSection);
+}
+
+// ===================================
+// Dynamic Year in Footer
+// ===================================
+
+const currentYear = new Date().getFullYear();
+const footerText = document.querySelector('.footer-bottom p');
+if (footerText) {
+    footerText.textContent = `© ${currentYear} InkSync Pro. All rights reserved.`;
+}
+
+// ===================================
+// Button Ripple Effect
+// ===================================
+
+document.querySelectorAll('.btn').forEach(button => {
+    button.addEventListener('click', function(e) {
+        const ripple = document.createElement('span');
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top - size / 2;
+
+        ripple.style.width = ripple.style.height = size + 'px';
+        ripple.style.left = x + 'px';
+        ripple.style.top = y + 'px';
+        ripple.classList.add('ripple');
+
+        this.appendChild(ripple);
+
+        setTimeout(() => {
+            ripple.remove();
+        }, 600);
+    });
+});
+
+// Add ripple styles dynamically
+const style = document.createElement('style');
+style.textContent = `
+    .btn {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .ripple {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.6);
+        transform: scale(0);
+        animation: ripple-animation 0.6s ease-out;
+        pointer-events: none;
+    }
+
+    @keyframes ripple-animation {
+        to {
+            transform: scale(4);
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(style);
+
+// ===================================
+// Preload Critical Resources
+// ===================================
+
+window.addEventListener('load', () => {
+    // Remove any loading states
+    document.body.classList.add('loaded');
+
+    // Trigger animations
+    const hero = document.querySelector('.hero');
+    if (hero) {
+        hero.classList.add('animate');
+    }
+});
+
+// ===================================
+// Performance Optimization
+// ===================================
+
+// Lazy load images (if any are added later)
+if ('IntersectionObserver' in window) {
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                if (img.dataset.src) {
+                    img.src = img.dataset.src;
+                    img.removeAttribute('data-src');
+                    observer.unobserve(img);
+                }
+            }
+        });
+    });
+
+    document.querySelectorAll('img[data-src]').forEach(img => {
+        imageObserver.observe(img);
+    });
+}
+
+// ===================================
+// Accessibility Enhancements
+// ===================================
+
+// Keyboard navigation for menu
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+        navMenu.classList.remove('active');
+        const spans = navToggle.querySelectorAll('span');
+        spans[0].style.transform = '';
+        spans[1].style.opacity = '';
+        spans[2].style.transform = '';
+    }
+});
+
+// Focus management
+const focusableElements = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+const modal = document.querySelector('.nav-menu');
+
+navToggle.addEventListener('click', () => {
+    if (navMenu.classList.contains('active')) {
+        // Trap focus in menu
+        const firstFocusable = navMenu.querySelectorAll(focusableElements)[0];
+        if (firstFocusable) {
+            firstFocusable.focus();
+        }
+    }
+});
+
+// ===================================
+// Console Branding
+// ===================================
+
+console.log(
+    '%cInkSync Pro',
+    'font-size: 24px; font-weight: bold; color: #0071e3; text-shadow: 2px 2px 4px rgba(0,0,0,0.1);'
+);
+console.log(
+    '%cBuilt with precision and care',
+    'font-size: 12px; color: #6e6e73;'
+);
+console.log(
+    '%cInterested in joining our team? We\'re hiring!',
+    'font-size: 12px; color: #0071e3; font-weight: bold;'
+);
