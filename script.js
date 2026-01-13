@@ -346,6 +346,146 @@ navToggle.addEventListener('click', () => {
 });
 
 // ===================================
+// Animated Statistics Counters
+// ===================================
+
+const animateCounter = (element, target, duration = 2000) => {
+    const start = 0;
+    const increment = target / (duration / 16); // 60fps
+    let current = start;
+
+    const updateCounter = () => {
+        current += increment;
+        if (current < target) {
+            // Format number based on type
+            if (element.textContent.includes('K+')) {
+                element.textContent = Math.floor(current) + 'K+';
+            } else if (element.textContent.includes('M+')) {
+                element.textContent = (current / 1000).toFixed(1) + 'M+';
+            } else if (element.textContent.includes('%')) {
+                element.textContent = current.toFixed(1) + '%';
+            } else if (element.textContent.includes('+')) {
+                element.textContent = Math.floor(current) + '+';
+            } else {
+                element.textContent = Math.floor(current);
+            }
+            requestAnimationFrame(updateCounter);
+        } else {
+            // Set final value
+            if (element.textContent.includes('K+')) {
+                element.textContent = target + 'K+';
+            } else if (element.textContent.includes('M+')) {
+                element.textContent = (target / 1000).toFixed(1) + 'M+';
+            } else if (element.textContent.includes('%')) {
+                element.textContent = target + '%';
+            } else if (element.textContent.includes('+')) {
+                element.textContent = target + '+';
+            } else {
+                element.textContent = target;
+            }
+        }
+    };
+
+    updateCounter();
+};
+
+// Observe stat cards and animate counters
+const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting && !entry.target.dataset.animated) {
+            const statNumber = entry.target.querySelector('.stat-number');
+            const text = statNumber.textContent;
+
+            // Parse the number from the text
+            let targetValue;
+            if (text.includes('K+')) {
+                targetValue = parseFloat(text.replace('K+', ''));
+            } else if (text.includes('M+')) {
+                targetValue = parseFloat(text.replace('M+', '')) * 1000;
+            } else if (text.includes('%')) {
+                targetValue = parseFloat(text.replace('%', ''));
+            } else if (text.includes('+')) {
+                targetValue = parseFloat(text.replace('+', ''));
+            } else {
+                targetValue = parseFloat(text);
+            }
+
+            animateCounter(statNumber, targetValue, 2000);
+            entry.target.dataset.animated = 'true';
+        }
+    });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.stat-card').forEach(card => {
+    statsObserver.observe(card);
+});
+
+// ===================================
+// Enhanced Hero Text Reveal
+// ===================================
+
+window.addEventListener('load', () => {
+    const heroTitle = document.querySelector('.hero-title');
+    const heroSubtitle = document.querySelector('.hero-subtitle');
+    const heroCta = document.querySelector('.hero-cta');
+
+    if (heroTitle) {
+        heroTitle.style.opacity = '0';
+        heroTitle.style.transform = 'translateY(30px)';
+        setTimeout(() => {
+            heroTitle.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            heroTitle.style.opacity = '1';
+            heroTitle.style.transform = 'translateY(0)';
+        }, 200);
+    }
+
+    if (heroSubtitle) {
+        heroSubtitle.style.opacity = '0';
+        heroSubtitle.style.transform = 'translateY(30px)';
+        setTimeout(() => {
+            heroSubtitle.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            heroSubtitle.style.opacity = '1';
+            heroSubtitle.style.transform = 'translateY(0)';
+        }, 400);
+    }
+
+    if (heroCta) {
+        heroCta.style.opacity = '0';
+        heroCta.style.transform = 'translateY(30px)';
+        setTimeout(() => {
+            heroCta.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            heroCta.style.opacity = '1';
+            heroCta.style.transform = 'translateY(0)';
+        }, 600);
+    }
+});
+
+// ===================================
+// Smooth Scroll Progress Indicator
+// ===================================
+
+window.addEventListener('scroll', () => {
+    const scrollProgress = (window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+
+    // You can add a progress bar element if desired
+    // For now, we'll use this for future enhancements
+});
+
+// ===================================
+// Enhanced Button Interactions
+// ===================================
+
+document.querySelectorAll('.btn').forEach(button => {
+    button.addEventListener('mouseenter', function() {
+        this.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+    });
+
+    button.addEventListener('mouseleave', function() {
+        this.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+    });
+});
+
+// ===================================
 // Console Branding
 // ===================================
 
