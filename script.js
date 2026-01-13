@@ -501,3 +501,417 @@ console.log(
     '%cInterested in joining our team? We\'re hiring!',
     'font-size: 12px; color: #0071e3; font-weight: bold;'
 );
+
+// ===================================
+// Premium Micro-Interactions
+// ===================================
+
+// Magnetic Button Effect
+document.querySelectorAll('.btn-primary, .btn-secondary').forEach(button => {
+    button.addEventListener('mousemove', function(e) {
+        const rect = this.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+
+        const moveX = x * 0.15;
+        const moveY = y * 0.15;
+
+        this.style.transform = `translate(${moveX}px, ${moveY}px)`;
+    });
+
+    button.addEventListener('mouseleave', function() {
+        this.style.transform = '';
+    });
+});
+
+// 3D Card Tilt Effect
+function addCardTiltEffect(selector) {
+    document.querySelectorAll(selector).forEach(card => {
+        card.addEventListener('mousemove', function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateX = (y - centerY) / 10;
+            const rotateY = (centerX - x) / 10;
+
+            this.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+        });
+
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = '';
+        });
+    });
+}
+
+// Apply tilt effect to cards
+addCardTiltEffect('.feature-card');
+addCardTiltEffect('.price-card');
+addCardTiltEffect('.stat-card');
+addCardTiltEffect('.testimonial-card');
+
+// Toast Notification System
+class ToastNotification {
+    constructor() {
+        this.container = null;
+        this.init();
+    }
+
+    init() {
+        // Create toast container if it doesn't exist
+        if (!document.querySelector('.toast-container')) {
+            this.container = document.createElement('div');
+            this.container.className = 'toast-container';
+            document.body.appendChild(this.container);
+        } else {
+            this.container = document.querySelector('.toast-container');
+        }
+    }
+
+    show(options = {}) {
+        const {
+            type = 'info',
+            title = '',
+            message = '',
+            duration = 3000
+        } = options;
+
+        const toast = document.createElement('div');
+        toast.className = `toast toast-${type}`;
+
+        const icons = {
+            success: '✓',
+            error: '✕',
+            warning: '!',
+            info: 'i'
+        };
+
+        toast.innerHTML = `
+            <div class="toast-icon">${icons[type] || 'i'}</div>
+            <div class="toast-content">
+                ${title ? `<div class="toast-title">${title}</div>` : ''}
+                ${message ? `<div class="toast-message">${message}</div>` : ''}
+            </div>
+            <button class="toast-close" aria-label="Close">×</button>
+            <div class="toast-progress"></div>
+        `;
+
+        this.container.appendChild(toast);
+
+        // Close button functionality
+        const closeBtn = toast.querySelector('.toast-close');
+        closeBtn.addEventListener('click', () => {
+            this.hide(toast);
+        });
+
+        // Auto hide after duration
+        if (duration > 0) {
+            setTimeout(() => {
+                this.hide(toast);
+            }, duration);
+        }
+
+        return toast;
+    }
+
+    hide(toast) {
+        toast.classList.add('toast-hiding');
+        setTimeout(() => {
+            toast.remove();
+        }, 300);
+    }
+
+    success(message, title = 'Success') {
+        return this.show({ type: 'success', title, message });
+    }
+
+    error(message, title = 'Error') {
+        return this.show({ type: 'error', title, message });
+    }
+
+    warning(message, title = 'Warning') {
+        return this.show({ type: 'warning', title, message });
+    }
+
+    info(message, title = 'Info') {
+        return this.show({ type: 'info', title, message });
+    }
+}
+
+// Initialize toast system
+window.toast = new ToastNotification();
+
+// Enhanced Form Validation with Animations
+document.querySelectorAll('form').forEach(form => {
+    form.addEventListener('submit', function(e) {
+        const inputs = this.querySelectorAll('.form-input, .form-textarea, .form-select');
+        let isValid = true;
+
+        inputs.forEach(input => {
+            if (input.hasAttribute('required') && !input.value.trim()) {
+                e.preventDefault();
+                isValid = false;
+
+                // Add error state with shake animation
+                input.classList.add('error', 'shake');
+
+                // Remove shake class after animation
+                setTimeout(() => {
+                    input.classList.remove('shake');
+                }, 500);
+
+                // Show error toast
+                if (inputs[0] === input) { // Only show toast for first error
+                    window.toast.error('Please fill in all required fields', 'Validation Error');
+                }
+            } else if (input.value.trim()) {
+                // Add success state with bounce animation
+                input.classList.remove('error');
+                input.classList.add('success', 'bounce');
+
+                setTimeout(() => {
+                    input.classList.remove('bounce');
+                }, 400);
+            }
+        });
+    });
+});
+
+// Form Input Real-time Validation
+document.querySelectorAll('.form-input[type="email"]').forEach(input => {
+    input.addEventListener('blur', function() {
+        if (this.value.trim()) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (emailRegex.test(this.value)) {
+                this.classList.remove('error');
+                this.classList.add('success', 'bounce');
+                setTimeout(() => this.classList.remove('bounce'), 400);
+            } else {
+                this.classList.remove('success');
+                this.classList.add('error', 'shake');
+                setTimeout(() => this.classList.remove('shake'), 500);
+            }
+        }
+    });
+});
+
+// Enhanced Checkbox/Radio Interactions
+document.querySelectorAll('.form-checkbox input, .form-radio input').forEach(input => {
+    input.addEventListener('change', function() {
+        if (this.checked) {
+            // Add a subtle haptic-style feedback
+            const customEl = this.parentElement.querySelector('.form-checkbox-custom, .form-radio-custom');
+            if (customEl) {
+                customEl.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    customEl.style.transform = '';
+                }, 200);
+            }
+        }
+    });
+});
+
+// Toggle Switch Enhanced Interaction
+document.querySelectorAll('.form-toggle input').forEach(toggle => {
+    toggle.addEventListener('change', function() {
+        const switchEl = this.parentElement.querySelector('.form-toggle-switch');
+        if (switchEl) {
+            // Add bounce effect
+            switchEl.style.transform = 'scale(1.05)';
+            setTimeout(() => {
+                switchEl.style.transform = '';
+            }, 200);
+        }
+    });
+});
+
+// Demo Button Interactions for UI Demo Section
+document.querySelectorAll('.ui-demo .btn').forEach(button => {
+    button.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        const buttonText = this.textContent.trim();
+
+        if (buttonText.includes('Primary')) {
+            window.toast.success('Primary action completed!', 'Success');
+        } else if (buttonText.includes('Secondary')) {
+            window.toast.info('Secondary action triggered', 'Information');
+        } else if (buttonText.includes('Outline')) {
+            window.toast.warning('This is a warning message', 'Warning');
+        } else if (buttonText.includes('Small')) {
+            window.toast.info('Small button clicked', 'Size: Small');
+        } else if (buttonText.includes('Large')) {
+            window.toast.info('Large button clicked', 'Size: Large');
+        } else if (buttonText.includes('Normal')) {
+            window.toast.success('Button in normal state', 'Normal');
+        } else if (buttonText.includes('Submit')) {
+            window.toast.success('Form would be submitted!', 'Demo Form');
+        } else {
+            window.toast.info('Button clicked!', 'Action');
+        }
+    });
+});
+
+// Enhanced Link Hover Effects
+document.querySelectorAll('.showcase-link, .footer-section a').forEach(link => {
+    link.addEventListener('mouseenter', function() {
+        this.style.transition = 'all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)';
+    });
+});
+
+// Icon Button Rotation Effect
+document.querySelectorAll('.btn-icon').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.toast.info('Icon button activated', 'Action');
+    });
+});
+
+// Enhanced CTA Button Interaction
+document.querySelectorAll('.hero-cta .btn, .pricing .btn, .contact .btn').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+        // Don't prevent default for anchor tags
+        if (!this.hasAttribute('type')) {
+            e.preventDefault();
+        }
+
+        // Add success animation
+        const originalBg = this.style.background;
+        this.classList.add('btn-success-state');
+
+        setTimeout(() => {
+            this.classList.remove('btn-success-state');
+            this.style.background = originalBg;
+        }, 500);
+
+        // Show contextual toast
+        const btnText = this.textContent.trim();
+        if (btnText.includes('Trial') || btnText.includes('Started')) {
+            window.toast.success('Great choice! Your trial is starting...', 'Welcome aboard!');
+        } else if (btnText.includes('Learn More')) {
+            window.toast.info('Exploring more features...', 'Let\'s dive in');
+        } else if (btnText.includes('Contact')) {
+            window.toast.info('Opening contact form...', 'Get in touch');
+        }
+    });
+});
+
+// Smooth Button Group Transitions
+document.querySelectorAll('.btn-group-attached .btn').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        // Remove active class from siblings
+        this.parentElement.querySelectorAll('.btn').forEach(sibling => {
+            sibling.style.background = '';
+            sibling.style.color = '';
+        });
+
+        // Add active style
+        this.style.background = 'var(--color-primary)';
+        this.style.color = 'white';
+
+        window.toast.info(`Selected: ${this.textContent}`, 'Button Group');
+    });
+});
+
+// Feature Card Icon Enhanced Animation
+document.querySelectorAll('.feature-icon').forEach(icon => {
+    icon.addEventListener('click', function() {
+        this.style.animation = 'none';
+        setTimeout(() => {
+            this.style.animation = '';
+        }, 10);
+    });
+});
+
+// Pricing Card Interactive Feedback
+document.querySelectorAll('.price-card').forEach(card => {
+    card.addEventListener('click', function() {
+        // Highlight selected card
+        document.querySelectorAll('.price-card').forEach(c => {
+            c.style.borderColor = '';
+        });
+
+        this.style.borderColor = 'var(--color-primary)';
+        this.style.borderWidth = '3px';
+
+        const planName = this.querySelector('h3').textContent;
+        window.toast.success(`${planName} plan selected!`, 'Great choice!');
+    });
+});
+
+// Statistics Counter Enhanced with Interaction
+document.querySelectorAll('.stat-card').forEach(card => {
+    card.addEventListener('click', function() {
+        const statLabel = this.querySelector('.stat-label').textContent;
+        window.toast.info(`Viewing details for ${statLabel}`, 'Statistics');
+    });
+});
+
+// Testimonial Card Interaction
+document.querySelectorAll('.testimonial-card').forEach(card => {
+    card.addEventListener('click', function() {
+        const authorName = this.querySelector('.author-name').textContent;
+        window.toast.info(`Read full story from ${authorName}`, 'Testimonial');
+    });
+});
+
+// Navigation Link Active State Enhancement
+document.querySelectorAll('.nav-menu a').forEach(link => {
+    link.addEventListener('click', function() {
+        // Remove active class from all links
+        document.querySelectorAll('.nav-menu a').forEach(l => {
+            l.style.fontWeight = '';
+            l.style.color = '';
+        });
+
+        // Add active style
+        this.style.fontWeight = 'var(--font-weight-semibold)';
+        this.style.color = 'var(--color-primary)';
+    });
+});
+
+// Enhanced Form Demo
+const demoForm = document.querySelector('.demo-form');
+if (demoForm) {
+    demoForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Simulate form processing
+        const submitBtn = this.querySelector('button[type="submit"]');
+        const originalText = submitBtn.textContent;
+
+        submitBtn.classList.add('btn-loading');
+        submitBtn.disabled = true;
+
+        setTimeout(() => {
+            submitBtn.classList.remove('btn-loading');
+            submitBtn.classList.add('btn-success-state');
+            submitBtn.textContent = '✓ Submitted!';
+
+            window.toast.success('Your form has been submitted successfully!', 'Success!');
+
+            setTimeout(() => {
+                submitBtn.classList.remove('btn-success-state');
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                this.reset();
+            }, 2000);
+        }, 1500);
+    });
+
+    demoForm.addEventListener('reset', function(e) {
+        window.toast.info('Form has been reset', 'Reset');
+    });
+}
+
+// Show welcome toast on page load
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        window.toast.success('Welcome to InkSync Pro! Explore our premium micro-interactions.', 'Premium Experience', 5000);
+    }, 1000);
+});
