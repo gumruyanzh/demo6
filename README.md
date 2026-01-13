@@ -51,7 +51,7 @@ demo6/
 
 ### Color Palette
 ```css
---color-primary: #0071e3;          /* Apple Blue */
+--color-primary: #10b981;          /* Emerald Green */
 --color-secondary: #1d1d1f;        /* Near Black */
 --color-background: #fbfbfd;       /* Soft White */
 --color-text-primary: #1d1d1f;     /* Primary Text */
@@ -204,7 +204,7 @@ This is a static site and can be deployed to:
 Update CSS custom properties in `styles.css`:
 ```css
 :root {
-    --color-primary: #0071e3;
+    --color-primary: #10b981;
     --color-secondary: #1d1d1f;
     /* ... other colors */
 }
