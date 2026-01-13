@@ -252,7 +252,7 @@ contactForm.addEventListener('submit', (e) => {
     }, 1500);
 
     // In production, you would send this to your backend
-    console.log('Form submitted with email:', email);
+    // Email submission would be handled by your backend API
 });
 
 // ===================================
@@ -268,7 +268,14 @@ const techObserver = new IntersectionObserver((entries) => {
                 setTimeout(() => {
                     node.style.opacity = '1';
                     node.style.transform = 'scale(1)';
+                    node.classList.add('animate');
                 }, index * 200);
+            });
+        } else {
+            // Pause animations when not visible to improve performance
+            const nodes = entry.target.querySelectorAll('.tech-node');
+            nodes.forEach(node => {
+                node.classList.remove('animate');
             });
         }
     });
@@ -633,7 +640,6 @@ function handleImageErrors() {
 
     images.forEach(img => {
         img.addEventListener('error', function() {
-            console.warn('Failed to load image:', this.src);
             // Add error class for custom styling if needed
             this.classList.add('img-error');
         });
