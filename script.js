@@ -151,6 +151,155 @@ window.addEventListener('scroll', throttle(updateActiveNavLink, 100));
 document.addEventListener('DOMContentLoaded', updateActiveNavLink);
 
 // ===================================
+// Testimonials Dynamic Loading
+// ===================================
+
+// Testimonials data (simulating API response)
+const testimonialsData = [
+    {
+        id: 1,
+        quote: "InkSync Pro has transformed how our design team collaborates. The real-time sync is flawless, and we've never lost a single stroke of work.",
+        authorName: "Sarah Mitchell",
+        authorRole: "Creative Director, DesignLab",
+        authorInitials: "SM",
+        featured: false
+    },
+    {
+        id: 2,
+        quote: "The version control feature saved my project when I needed to revisit an earlier concept. InkSync Pro is an essential tool for any serious digital artist.",
+        authorName: "James Chen",
+        authorRole: "Digital Illustrator",
+        authorInitials: "JC",
+        featured: true
+    },
+    {
+        id: 3,
+        quote: "I can start sketching on my iPad during my commute and seamlessly continue on my desktop at the studio. It's magic.",
+        authorName: "Emily Parker",
+        authorRole: "UX Designer, TechFlow",
+        authorInitials: "EP",
+        featured: false
+    }
+];
+
+// Simulate API call to fetch testimonials
+function fetchTestimonials() {
+    return new Promise((resolve, reject) => {
+        // Simulate network delay
+        setTimeout(() => {
+            // Simulate 90% success rate for demo purposes
+            // In production, this would be a real API call
+            const shouldSucceed = Math.random() > 0.1;
+
+            if (shouldSucceed) {
+                resolve(testimonialsData);
+            } else {
+                reject(new Error('Failed to load testimonials'));
+            }
+        }, 1500); // 1.5 second delay to show loading state
+    });
+}
+
+// Render testimonial card
+function createTestimonialCard(testimonial) {
+    const card = document.createElement('div');
+    card.className = `testimonial-card${testimonial.featured ? ' featured-testimonial' : ''}`;
+
+    card.innerHTML = `
+        <div class="testimonial-quote">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/>
+            </svg>
+        </div>
+        <p class="testimonial-text">
+            "${testimonial.quote}"
+        </p>
+        <div class="testimonial-author">
+            <div class="author-avatar">${testimonial.authorInitials}</div>
+            <div class="author-info">
+                <div class="author-name">${testimonial.authorName}</div>
+                <div class="author-role">${testimonial.authorRole}</div>
+            </div>
+        </div>
+    `;
+
+    return card;
+}
+
+// Show loading state
+function showLoadingState() {
+    document.getElementById('testimonials-loading').style.display = 'block';
+    document.getElementById('testimonials-error').style.display = 'none';
+    document.getElementById('testimonials-content').style.display = 'none';
+}
+
+// Show error state
+function showErrorState() {
+    document.getElementById('testimonials-loading').style.display = 'none';
+    document.getElementById('testimonials-error').style.display = 'block';
+    document.getElementById('testimonials-content').style.display = 'none';
+}
+
+// Show content state
+function showContentState() {
+    document.getElementById('testimonials-loading').style.display = 'none';
+    document.getElementById('testimonials-error').style.display = 'none';
+    document.getElementById('testimonials-content').style.display = 'grid';
+}
+
+// Load and render testimonials
+async function loadTestimonials() {
+    showLoadingState();
+
+    try {
+        const testimonials = await fetchTestimonials();
+        const container = document.getElementById('testimonials-content');
+
+        // Clear existing content
+        container.innerHTML = '';
+
+        // Render testimonials
+        testimonials.forEach(testimonial => {
+            const card = createTestimonialCard(testimonial);
+            container.appendChild(card);
+        });
+
+        showContentState();
+
+        // Apply scroll animations to newly added cards
+        applyTestimonialAnimations();
+
+    } catch (error) {
+        console.error('Error loading testimonials:', error);
+        showErrorState();
+    }
+}
+
+// Apply scroll animations to testimonial cards
+function applyTestimonialAnimations() {
+    const cards = document.querySelectorAll('#testimonials-content .testimonial-card');
+    cards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = `opacity 0.6s ease ${index * 0.15}s, transform 0.6s ease ${index * 0.15}s`;
+        observer.observe(card);
+    });
+}
+
+// Initialize testimonials loading on page load
+document.addEventListener('DOMContentLoaded', () => {
+    loadTestimonials();
+
+    // Add retry button event listener
+    const retryBtn = document.getElementById('retry-testimonials');
+    if (retryBtn) {
+        retryBtn.addEventListener('click', () => {
+            loadTestimonials();
+        });
+    }
+});
+
+// ===================================
 // Intersection Observer for Animations
 // ===================================
 
@@ -192,13 +341,7 @@ document.querySelectorAll('.stat-card').forEach((card, index) => {
     observer.observe(card);
 });
 
-// Observe testimonial cards
-document.querySelectorAll('.testimonial-card').forEach((card, index) => {
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(30px)';
-    card.style.transition = `opacity 0.6s ease ${index * 0.15}s, transform 0.6s ease ${index * 0.15}s`;
-    observer.observe(card);
-});
+// Testimonial cards are now loaded dynamically - see loadTestimonials() function above
 
 // Observe showcase cards
 document.querySelectorAll('.showcase-card').forEach((card, index) => {
