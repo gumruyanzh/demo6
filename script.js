@@ -241,7 +241,7 @@ contactForm.addEventListener('submit', (e) => {
 
     setTimeout(() => {
         button.textContent = '✓ Success!';
-        button.style.background = '#28a745';
+        button.style.background = '#3b82f6';
 
         setTimeout(() => {
             button.textContent = originalText;

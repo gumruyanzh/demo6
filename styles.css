@@ -4,9 +4,9 @@
 
 :root {
     /* Colors - Minimalist Palette */
-    --color-primary: #10b981;
-    --color-primary-dark: #059669;
-    --color-primary-light: #34d399;
+    --color-primary: #3b82f6;
+    --color-primary-dark: #2563eb;
+    --color-primary-light: #60a5fa;
     --color-secondary: #1d1d1f;
     --color-background: #fbfbfd;
     --color-surface: #ffffff;
@@ -218,14 +218,14 @@ body {
     color: white !important;
     border-radius: 20px;
     font-weight: var(--font-weight-semibold);
-    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.25);
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.25);
     transition: all var(--transition-fast);
 }
 
 .nav-cta:hover {
     background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary));
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.35);
 }
 
 .nav-cta:active {
@@ -455,22 +455,22 @@ body {
 .btn-primary {
     background: var(--color-primary);
     color: white;
-    box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
+    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
 }
 
 .btn-primary:hover {
     background: var(--color-primary-dark);
     transform: translateY(-2px);
-    box-shadow: 0 6px 24px rgba(16, 185, 129, 0.4);
+    box-shadow: 0 6px 24px rgba(59, 130, 246, 0.4);
 }
 
 .btn-primary:active {
     transform: translateY(0);
-    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
 }
 
 .btn-primary:focus-visible {
-    outline: 3px solid rgba(16, 185, 129, 0.4);
+    outline: 3px solid rgba(59, 130, 246, 0.4);
     outline-offset: 2px;
 }
 
@@ -484,7 +484,7 @@ body {
     background: var(--color-primary);
     color: white;
     transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(16, 185, 129, 0.2);
+    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.2);
 }
 
 .btn-secondary:active {
@@ -492,7 +492,7 @@ body {
 }
 
 .btn-secondary:focus-visible {
-    outline: 3px solid rgba(16, 185, 129, 0.3);
+    outline: 3px solid rgba(59, 130, 246, 0.3);
     outline-offset: 2px;
 }
 
@@ -505,7 +505,7 @@ body {
 .btn-outline:hover {
     border-color: var(--color-primary);
     color: var(--color-primary);
-    background: rgba(16, 185, 129, 0.05);
+    background: rgba(59, 130, 246, 0.05);
     transform: translateY(-2px);
 }
 
@@ -514,7 +514,7 @@ body {
 }
 
 .btn-outline:focus-visible {
-    outline: 3px solid rgba(16, 185, 129, 0.2);
+    outline: 3px solid rgba(59, 130, 246, 0.2);
     outline-offset: 2px;
 }
 
@@ -527,16 +527,16 @@ body {
 }
 
 .btn-ghost:hover {
-    background: rgba(16, 185, 129, 0.08);
+    background: rgba(59, 130, 246, 0.08);
     color: var(--color-primary);
 }
 
 .btn-ghost:active {
-    background: rgba(16, 185, 129, 0.12);
+    background: rgba(59, 130, 246, 0.12);
 }
 
 .btn-ghost:focus-visible {
-    outline: 2px solid rgba(16, 185, 129, 0.3);
+    outline: 2px solid rgba(59, 130, 246, 0.3);
     outline-offset: 2px;
 }
 
@@ -552,11 +552,11 @@ body {
 
 .btn-link:hover {
     text-decoration-color: var(--color-primary);
-    background: rgba(16, 185, 129, 0.05);
+    background: rgba(59, 130, 246, 0.05);
 }
 
 .btn-link:focus-visible {
-    outline: 2px solid rgba(16, 185, 129, 0.3);
+    outline: 2px solid rgba(59, 130, 246, 0.3);
     outline-offset: 2px;
     text-decoration-color: var(--color-primary);
 }
@@ -725,7 +725,7 @@ section {
 
 .feature-card:hover .feature-icon {
     transform: rotateY(360deg);
-    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
+    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4);
 }
 
 .feature-icon svg {
@@ -1000,10 +1000,10 @@ section {
 
 @keyframes badgePulse {
     0%, 100% {
-        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
     }
     50% {
-        box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+        box-shadow: 0 0 0 8px rgba(59, 130, 246, 0);
     }
 }
 
@@ -1139,7 +1139,7 @@ section {
 }
 
 .testimonial-card.featured-testimonial {
-    background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(52, 211, 153, 0.05));
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(96, 165, 250, 0.05));
     border-color: var(--color-primary);
     border-width: 2px;
     box-shadow: 0 8px 24px rgba(16, 185, 129, 0.15);
@@ -1205,7 +1205,7 @@ section {
 
 .testimonial-card:hover .author-avatar {
     transform: scale(1.1) rotate(5deg);
-    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
 }
 
 .author-info {
@@ -1518,14 +1518,14 @@ section {
 .form-input:hover,
 .form-textarea:hover,
 .form-select:hover {
-    border-color: rgba(16, 185, 129, 0.4);
+    border-color: rgba(59, 130, 246, 0.4);
 }
 
 .form-input:focus,
 .form-textarea:focus,
 .form-select:focus {
     border-color: var(--color-primary);
-    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
     background: white;
 }
 
@@ -1612,7 +1612,7 @@ section {
 .form-checkbox:hover .form-checkbox-custom,
 .form-radio:hover .form-radio-custom {
     border-color: var(--color-primary);
-    background: rgba(16, 185, 129, 0.05);
+    background: rgba(59, 130, 246, 0.05);
 }
 
 .form-checkbox input:checked ~ .form-checkbox-custom,
@@ -1623,7 +1623,7 @@ section {
 
 .form-checkbox input:focus ~ .form-checkbox-custom,
 .form-radio input:focus ~ .form-radio-custom {
-    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
 }
 
 .form-checkbox input:disabled ~ .form-checkbox-custom,
@@ -1705,7 +1705,7 @@ section {
 }
 
 .form-toggle input:focus ~ .form-toggle-switch {
-    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
 }
 
 .form-toggle input:disabled ~ .form-toggle-switch {
@@ -2076,7 +2076,7 @@ section {
     }
 
     .nav-menu a:hover {
-        background: rgba(16, 185, 129, 0.08);
+        background: rgba(59, 130, 246, 0.08);
     }
 
     .nav-menu a::after {
