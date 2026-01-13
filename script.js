@@ -489,6 +489,108 @@ document.querySelectorAll('.btn').forEach(button => {
 // Console Branding
 // ===================================
 
+// ===================================
+// Image Optimization & Lazy Loading
+// ===================================
+
+/**
+ * Enhanced lazy loading for images
+ * Uses Intersection Observer for better performance
+ */
+function initImageLazyLoading() {
+    // Check if browser supports Intersection Observer
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+
+                    // Load the image
+                    if (img.dataset.src) {
+                        img.src = img.dataset.src;
+                    }
+
+                    // Add loaded class for fade-in animation
+                    img.addEventListener('load', () => {
+                        img.classList.add('loaded');
+                    });
+
+                    // Stop observing this image
+                    observer.unobserve(img);
+                }
+            });
+        }, {
+            rootMargin: '50px 0px', // Start loading 50px before image enters viewport
+            threshold: 0.01
+        });
+
+        // Observe all lazy-loading images
+        const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+        lazyImages.forEach(img => {
+            imageObserver.observe(img);
+        });
+    } else {
+        // Fallback for browsers that don't support Intersection Observer
+        const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+        lazyImages.forEach(img => {
+            img.classList.add('loaded');
+        });
+    }
+}
+
+/**
+ * Preload critical images for better performance
+ */
+function preloadCriticalImages() {
+    const criticalImages = document.querySelectorAll('img[loading="eager"]');
+
+    criticalImages.forEach(img => {
+        if (img.complete) {
+            img.classList.add('loaded');
+        } else {
+            img.addEventListener('load', () => {
+                img.classList.add('loaded');
+            });
+        }
+    });
+}
+
+/**
+ * Image error handling
+ * Provides fallback for failed image loads
+ */
+function handleImageErrors() {
+    const images = document.querySelectorAll('img');
+
+    images.forEach(img => {
+        img.addEventListener('error', function() {
+            console.warn('Failed to load image:', this.src);
+            // Add error class for custom styling if needed
+            this.classList.add('img-error');
+        });
+    });
+}
+
+/**
+ * Initialize all image optimization features
+ */
+function initImageOptimization() {
+    preloadCriticalImages();
+    initImageLazyLoading();
+    handleImageErrors();
+}
+
+// Initialize image optimization when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initImageOptimization);
+} else {
+    initImageOptimization();
+}
+
+// ===================================
+// Console Branding
+// ===================================
+
 console.log(
     '%cInkSync Pro',
     'font-size: 24px; font-weight: bold; color: #0071e3; text-shadow: 2px 2px 4px rgba(0,0,0,0.1);'

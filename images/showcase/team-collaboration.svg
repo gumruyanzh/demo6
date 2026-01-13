@@ -1,0 +1,139 @@
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Premium Team Collaboration Illustration -->
+  <defs>
+    <linearGradient id="gradientTeam1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FA709A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FEE140;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="gradientTeam2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#30CFD0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#330867;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="gradientTeam3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#A8EDEA;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FED6E3;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="gradientTeam4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF9A56;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF6A88;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadowTeam" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="10"/>
+      <feOffset dx="0" dy="10" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.2"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background Elements -->
+  <circle cx="100" cy="100" r="80" fill="url(#gradientTeam1)" opacity="0.1"/>
+  <circle cx="700" cy="500" r="100" fill="url(#gradientTeam2)" opacity="0.1"/>
+
+  <!-- Shared Canvas/Document in Center -->
+  <g filter="url(#shadowTeam)">
+    <rect x="250" y="150" width="300" height="300" rx="12" fill="#ffffff" stroke="#e5e5e7" stroke-width="2"/>
+
+    <!-- Document Content -->
+    <rect x="280" y="190" width="120" height="10" rx="5" fill="url(#gradientTeam1)"/>
+    <rect x="280" y="215" width="240" height="6" rx="3" fill="#d1d1d6"/>
+    <rect x="280" y="230" width="220" height="6" rx="3" fill="#d1d1d6"/>
+    <rect x="280" y="245" width="200" height="6" rx="3" fill="#d1d1d6"/>
+
+    <!-- Collaboration elements -->
+    <rect x="280" y="270" width="110" height="80" rx="6" fill="url(#gradientTeam1)" opacity="0.15"/>
+    <rect x="400" y="270" width="120" height="80" rx="6" fill="url(#gradientTeam2)" opacity="0.15"/>
+
+    <rect x="280" y="365" width="240" height="6" rx="3" fill="#d1d1d6"/>
+    <rect x="280" y="380" width="180" height="6" rx="3" fill="#d1d1d6"/>
+    <rect x="280" y="395" width="200" height="6" rx="3" fill="#d1d1d6"/>
+
+    <!-- Active edit indicators -->
+    <circle cx="510" cy="185" r="3" fill="url(#gradientTeam1)">
+      <animate attributeName="opacity" values="1;0.3;1" dur="1.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="520" cy="185" r="3" fill="url(#gradientTeam2)">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="1.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="530" cy="185" r="3" fill="url(#gradientTeam3)">
+      <animate attributeName="opacity" values="1;0.3;1" dur="1.5s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- User Avatars -->
+  <!-- User 1 - Top Left -->
+  <g transform="translate(150, 120)" filter="url(#shadowTeam)">
+    <circle cx="0" cy="0" r="45" fill="url(#gradientTeam1)"/>
+    <circle cx="0" cy="0" r="38" fill="white" opacity="0.3"/>
+    <text x="0" y="8" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="600" fill="white" text-anchor="middle">SJ</text>
+    <circle cx="32" cy="32" r="10" fill="#34C759" stroke="white" stroke-width="2"/>
+  </g>
+
+  <!-- User 2 - Top Right -->
+  <g transform="translate(650, 140)" filter="url(#shadowTeam)">
+    <circle cx="0" cy="0" r="45" fill="url(#gradientTeam2)"/>
+    <circle cx="0" cy="0" r="38" fill="white" opacity="0.3"/>
+    <text x="0" y="8" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="600" fill="white" text-anchor="middle">MK</text>
+    <circle cx="32" cy="32" r="10" fill="#34C759" stroke="white" stroke-width="2"/>
+  </g>
+
+  <!-- User 3 - Bottom Left -->
+  <g transform="translate(140, 470)" filter="url(#shadowTeam)">
+    <circle cx="0" cy="0" r="45" fill="url(#gradientTeam3)"/>
+    <circle cx="0" cy="0" r="38" fill="white" opacity="0.3"/>
+    <text x="0" y="8" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="600" fill="#330867" text-anchor="middle">AL</text>
+    <circle cx="32" cy="32" r="10" fill="#34C759" stroke="white" stroke-width="2"/>
+  </g>
+
+  <!-- User 4 - Bottom Right -->
+  <g transform="translate(660, 480)" filter="url(#shadowTeam)">
+    <circle cx="0" cy="0" r="45" fill="url(#gradientTeam4)"/>
+    <circle cx="0" cy="0" r="38" fill="white" opacity="0.3"/>
+    <text x="0" y="8" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="600" fill="white" text-anchor="middle">TC</text>
+    <circle cx="32" cy="32" r="10" fill="#34C759" stroke="white" stroke-width="2"/>
+  </g>
+
+  <!-- Connection Lines -->
+  <path d="M 190 140 Q 220 150 250 180" stroke="url(#gradientTeam1)" stroke-width="2" fill="none" opacity="0.4" stroke-dasharray="5,5">
+    <animate attributeName="stroke-dashoffset" from="0" to="-10" dur="1s" repeatCount="indefinite"/>
+  </path>
+
+  <path d="M 610 160 Q 580 170 550 180" stroke="url(#gradientTeam2)" stroke-width="2" fill="none" opacity="0.4" stroke-dasharray="5,5">
+    <animate attributeName="stroke-dashoffset" from="0" to="-10" dur="1s" repeatCount="indefinite"/>
+  </path>
+
+  <path d="M 175 430 Q 210 400 250 400" stroke="url(#gradientTeam3)" stroke-width="2" fill="none" opacity="0.4" stroke-dasharray="5,5">
+    <animate attributeName="stroke-dashoffset" from="0" to="-10" dur="1s" repeatCount="indefinite"/>
+  </path>
+
+  <path d="M 620 460 Q 580 450 550 440" stroke="url(#gradientTeam4)" stroke-width="2" fill="none" opacity="0.4" stroke-dasharray="5,5">
+    <animate attributeName="stroke-dashoffset" from="0" to="-10" dur="1s" repeatCount="indefinite"/>
+  </path>
+
+  <!-- Comments/Feedback Bubbles -->
+  <g transform="translate(580, 260)">
+    <rect x="0" y="0" width="100" height="50" rx="8" fill="url(#gradientTeam1)" opacity="0.9" filter="url(#shadowTeam)"/>
+    <text x="50" y="22" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="500" fill="white" text-anchor="middle">Great work!</text>
+    <text x="50" y="38" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="white" text-anchor="middle" opacity="0.8">- Sarah J.</text>
+  </g>
+
+  <g transform="translate(120, 280)">
+    <rect x="0" y="0" width="110" height="50" rx="8" fill="url(#gradientTeam2)" opacity="0.9" filter="url(#shadowTeam)"/>
+    <text x="55" y="22" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="500" fill="white" text-anchor="middle">Updated section</text>
+    <text x="55" y="38" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="white" text-anchor="middle" opacity="0.8">- Mike K.</text>
+  </g>
+
+  <!-- Real-time Indicator -->
+  <g transform="translate(400, 520)">
+    <circle cx="0" cy="0" r="6" fill="#34C759">
+      <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <text x="15" y="5" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="600" fill="#34C759" text-anchor="start">
+      4 collaborators active
+    </text>
+  </g>
+</svg>

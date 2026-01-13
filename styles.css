@@ -258,7 +258,30 @@ body {
     top: 0;
     left: 0;
     pointer-events: none;
-    opacity: 0.1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Hero image optimization */
+.hero-image {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    object-fit: contain;
+    opacity: 0.7;
+    animation: heroFadeIn 1s ease forwards, float 8s ease-in-out infinite;
+}
+
+@keyframes heroFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 0.7;
+        transform: scale(1);
+    }
 }
 
 .floating-device {
@@ -1130,6 +1153,33 @@ section {
     position: relative;
     width: 100%;
     aspect-ratio: 4/3;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+}
+
+/* Optimized image styles */
+.showcase-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    transition: transform var(--transition-slow), opacity 0.3s ease;
+    display: block;
+}
+
+.showcase-img[loading="lazy"] {
+    opacity: 0;
+    animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.showcase-card:hover .showcase-img {
+    transform: scale(1.05);
 }
 
 .placeholder-image {
@@ -1953,5 +2003,74 @@ section {
 
     .showcase-content p {
         font-size: 1rem;
+    }
+}
+
+/* ============================================
+   Image Optimization and Performance Styles
+   ============================================ */
+
+/* General image optimization */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Prevent layout shift with aspect ratio */
+img[width][height] {
+    height: auto;
+}
+
+/* Lazy loading animation */
+img[loading="lazy"] {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+img[loading="lazy"].loaded {
+    opacity: 1;
+}
+
+/* Image blur-up technique for loading */
+.img-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.img-wrapper::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #f5f5f7 0%, #e5e5e7 100%);
+    z-index: -1;
+}
+
+/* Performance: Reduce animations on low-end devices */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .hero-image,
+    .showcase-img {
+        animation: none;
+    }
+}
+
+/* Print styles - optimize images for printing */
+@media print {
+    img {
+        max-width: 100% !important;
+        page-break-inside: avoid;
+    }
+
+    .hero-visual {
+        display: none;
     }
 }
