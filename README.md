@@ -44,18 +44,30 @@ demo6/
 ├── index.html          # Main HTML structure
 ├── styles.css          # Premium styling and design system
 ├── script.js           # Interactive functionality
+├── DESIGN_SYSTEM.md    # Comprehensive color palette & design guidelines
 └── README.md           # Documentation
 ```
 
 ## Design System
 
-### Color Palette
+**For comprehensive design system documentation, see [DESIGN_SYSTEM.md](./DESIGN_SYSTEM.md)**
+
+### Color Palette Overview
+
+Our premium color palette includes:
+- **Primary Colors**: 9-shade blue palette for brand identity
+- **Secondary Colors**: 9-shade slate/neutral palette for structure
+- **Accent Colors**: Emerald (success), Purple (premium), Rose (attention)
+- **Semantic Colors**: Success, Warning, Error, Info states
+- **WCAG AA/AAA Compliant**: All color combinations meet accessibility standards
+
+Quick reference:
 ```css
---color-primary: #10b981;          /* Emerald Green */
---color-secondary: #1d1d1f;        /* Near Black */
---color-background: #fbfbfd;       /* Soft White */
---color-text-primary: #1d1d1f;     /* Primary Text */
---color-text-secondary: #6e6e73;   /* Secondary Text */
+--color-primary-500: #3b82f6;      /* Main brand color */
+--color-secondary-600: #475569;    /* Body text */
+--color-accent-emerald-500: #10b981;  /* Success/growth */
+--color-accent-purple-500: #a855f7;   /* Premium features */
+--color-accent-rose-500: #f43f5e;     /* Attention/highlights */
 ```
 
 ### Typography
