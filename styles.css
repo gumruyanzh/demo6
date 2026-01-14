@@ -2164,8 +2164,10 @@ section {
    =================================== */
 
 @media (max-width: 768px) {
+    /* Navigation - Touch-friendly improvements */
     .nav-container {
         height: 56px;
+        padding: 0 var(--spacing-lg);
     }
 
     .nav-menu {
@@ -2174,8 +2176,8 @@ section {
         left: 0;
         right: 0;
         background: rgba(251, 251, 253, 0.98);
-        backdrop-filter: blur(30px) saturate(180%);
-        -webkit-backdrop-filter: blur(30px) saturate(180%);
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
         flex-direction: column;
         padding: var(--spacing-lg);
         gap: var(--spacing-md);
@@ -2185,9 +2187,10 @@ section {
         pointer-events: none;
         transition: all var(--transition-base);
         border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
         max-height: calc(100vh - 56px);
         overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
     }
 
     .nav-menu.active {
@@ -2219,14 +2222,16 @@ section {
         }
     }
 
+    /* Touch-friendly menu items - minimum 44px height */
     .nav-menu a {
         display: block;
         width: 100%;
-        padding: 12px 16px;
+        padding: 14px 16px;
         font-size: 16px;
         text-align: center;
         border-radius: 12px;
         transition: all var(--transition-fast);
+        min-height: 44px;
     }
 
     .nav-menu a:hover {
@@ -2238,62 +2243,147 @@ section {
     }
 
     .nav-cta {
-        padding: 12px 24px;
+        padding: 14px 24px;
         font-size: 16px;
+        min-height: 44px;
     }
 
     .nav-toggle {
         display: flex;
+        min-width: 44px;
+        min-height: 44px;
+        padding: 11px;
     }
 
+    /* Hero - Optimized for mobile performance */
     .hero {
         min-height: 80vh;
+        padding: var(--spacing-2xl) var(--spacing-lg);
         padding-top: calc(var(--spacing-2xl) + 56px);
+    }
+
+    /* Reduce animation complexity on mobile */
+    .hero-image {
+        animation: heroFadeIn 0.8s ease forwards;
+    }
+
+    /* Hide or simplify floating devices on mobile for performance */
+    .floating-device {
+        display: none;
+    }
+
+    .gradient-text {
+        animation: none;
+        background-position: 0% 50%;
     }
 
     .hero-cta {
         flex-direction: column;
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
     }
 
+    .hero-cta .btn {
+        width: 100%;
+        min-height: 48px;
+        padding: 14px 24px;
+        font-size: 16px;
+    }
+
+    /* Features - Better spacing on mobile */
     .features-grid {
         grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
     }
 
+    .feature-card {
+        padding: var(--spacing-xl);
+    }
+
+    .feature-card:hover {
+        transform: translateY(-2px);
+    }
+
+    /* Technology section */
     .technology-content {
         grid-template-columns: 1fr;
+        gap: var(--spacing-xl);
     }
 
     .technology-visual {
         height: 300px;
     }
 
+    /* Pricing - Mobile-optimized layout */
     .pricing-grid {
         grid-template-columns: 1fr;
+        gap: var(--spacing-xl);
+    }
+
+    .price-card {
+        padding: var(--spacing-xl);
     }
 
     .price-card.featured {
         transform: scale(1);
     }
 
+    .price-card:hover {
+        transform: translateY(-4px);
+    }
+
+    /* Improve price readability on mobile */
+    .amount {
+        font-size: 3.5rem;
+    }
+
+    .price-card .btn {
+        min-height: 48px;
+        font-size: 16px;
+    }
+
+    /* Contact form - Touch-friendly */
     .contact-form {
         flex-direction: column;
+        gap: var(--spacing-md);
     }
 
-    .contact-form input {
+    .contact-form input,
+    .contact-form textarea {
         min-width: 100%;
+        font-size: 16px;
+        padding: 14px 16px;
+        min-height: 48px;
     }
 
+    .contact-form button {
+        min-height: 48px;
+        font-size: 16px;
+    }
+
+    /* Stats - Better layout on tablet */
     .stats-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-lg);
     }
 
+    .stat-card {
+        padding: var(--spacing-xl);
+    }
+
+    /* Testimonials - Improved readability */
     .testimonials-grid {
         grid-template-columns: 1fr;
-        gap: var(--spacing-lg);
+        gap: var(--spacing-xl);
     }
 
     .testimonial-card {
         padding: var(--spacing-xl);
+    }
+
+    .testimonial-card:hover {
+        transform: translateY(-2px);
     }
 
     .testimonial-text {
@@ -2302,26 +2392,94 @@ section {
     }
 
     .author-avatar {
-        width: 52px;
-        height: 52px;
+        width: 56px;
+        height: 56px;
         font-size: 1rem;
     }
 
+    /* Showcase - Single column layout */
     .showcase-card {
         grid-template-columns: 1fr;
         gap: var(--spacing-xl);
+        padding: var(--spacing-xl);
     }
 
     .showcase-card-reverse {
         direction: ltr;
     }
 
+    .showcase-content {
+        padding: 0;
+    }
+
     .showcase-content h3 {
         font-size: 1.5rem;
+        margin-bottom: var(--spacing-md);
+    }
+
+    .showcase-content p {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    /* Buttons - Touch-optimized */
+    .btn {
+        min-height: 44px;
+        padding: 12px 20px;
+        font-size: 15px;
+    }
+
+    .btn-lg {
+        min-height: 48px;
+        padding: 14px 28px;
+        font-size: 16px;
+    }
+
+    .btn-sm {
+        min-height: 36px;
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    /* Form elements - Prevent iOS zoom */
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="tel"],
+    input[type="number"],
+    input[type="search"],
+    input[type="url"],
+    textarea,
+    select {
+        font-size: 16px;
+    }
+
+    /* Reduce shadow complexity on mobile */
+    .feature-card,
+    .price-card,
+    .testimonial-card,
+    .showcase-card {
+        box-shadow: var(--shadow-md);
+    }
+
+    .feature-card:hover,
+    .price-card:hover,
+    .testimonial-card:hover {
+        box-shadow: var(--shadow-lg);
+    }
+
+    /* Footer - Better mobile layout */
+    .footer-content {
+        gap: var(--spacing-xl);
+    }
+
+    .footer-column {
+        min-width: 100%;
     }
 }
 
 @media (max-width: 480px) {
+    /* Mobile-first spacing */
     .nav-container {
         padding: 0 var(--spacing-md);
     }
@@ -2330,36 +2488,117 @@ section {
         padding: var(--spacing-2xl) var(--spacing-md);
     }
 
+    /* Typography optimized for small screens */
     .hero-title {
         font-size: 2rem;
+        line-height: 1.2;
+        letter-spacing: -1px;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+        line-height: 1.6;
     }
 
     .section-title {
         font-size: 1.75rem;
+        line-height: 1.3;
+        letter-spacing: -1px;
+        margin-bottom: var(--spacing-md);
     }
 
+    .section-subtitle {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    /* Stats - Single column on small mobile */
     .stats-grid {
         grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+
+    .stat-card {
+        padding: var(--spacing-lg);
     }
 
     .stat-number {
         font-size: 2.5rem;
+        letter-spacing: -1px;
+    }
+
+    .stat-label {
+        font-size: 0.9375rem;
+    }
+
+    /* Features - Compact mobile layout */
+    .feature-card {
+        padding: var(--spacing-lg);
+    }
+
+    .feature-icon {
+        width: 48px;
+        height: 48px;
+        margin-bottom: var(--spacing-md);
+    }
+
+    .feature-card h3 {
+        font-size: 1.125rem;
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .feature-card p {
+        font-size: 0.9375rem;
+        line-height: 1.6;
+    }
+
+    /* Pricing - Improved readability */
+    .price-card {
+        padding: var(--spacing-lg);
+    }
+
+    .amount {
+        font-size: 3rem;
+        letter-spacing: -1.5px;
+    }
+
+    .currency {
+        font-size: 1.25rem;
+    }
+
+    .period {
+        font-size: 0.9375rem;
+    }
+
+    .price-features li {
+        font-size: 0.9375rem;
+        padding: var(--spacing-xs) 0;
+    }
+
+    /* Showcase - Compact layout */
+    .showcase-card {
+        padding: var(--spacing-lg);
+        gap: var(--spacing-lg);
     }
 
     .showcase-content h3 {
         font-size: 1.25rem;
+        line-height: 1.3;
     }
 
     .showcase-content p {
-        font-size: 1rem;
+        font-size: 0.9375rem;
+        line-height: 1.6;
     }
 
+    /* Testimonials - Compact and readable */
     .testimonial-card {
         padding: var(--spacing-lg);
     }
 
     .testimonial-text {
         font-size: 0.9375rem;
+        line-height: 1.7;
     }
 
     .testimonial-quote svg {
@@ -2379,6 +2618,227 @@ section {
 
     .author-role {
         font-size: 0.875rem;
+    }
+
+    /* Buttons - Maintain touch targets */
+    .btn {
+        min-height: 44px;
+        padding: 12px 18px;
+        font-size: 15px;
+    }
+
+    .btn-lg {
+        min-height: 48px;
+        padding: 14px 24px;
+        font-size: 16px;
+    }
+
+    .hero-cta .btn {
+        width: 100%;
+        min-height: 48px;
+    }
+
+    /* Form elements - Touch-friendly */
+    .contact-form input,
+    .contact-form textarea {
+        font-size: 16px;
+        padding: 12px 14px;
+    }
+
+    .contact-form button {
+        min-height: 48px;
+        width: 100%;
+    }
+
+    /* Technology section - Compact */
+    .technology-visual {
+        height: 250px;
+    }
+
+    .tech-node {
+        width: 40px;
+        height: 40px;
+        font-size: 0.875rem;
+    }
+
+    /* Footer - Single column */
+    .footer {
+        padding: var(--spacing-xl) var(--spacing-md);
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+    }
+
+    .footer-column h4 {
+        font-size: 1rem;
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .footer-links a {
+        font-size: 0.9375rem;
+    }
+
+    /* Reduce animations for better mobile performance */
+    .badge {
+        animation: none;
+    }
+
+    /* Hide complex visual effects on very small screens */
+    .hero-visual::before,
+    .hero-visual::after {
+        display: none;
+    }
+}
+
+/* ===================================
+   Mobile Landscape Optimization
+   =================================== */
+@media (max-width: 896px) and (orientation: landscape) {
+    /* Adjust hero for landscape mobile devices */
+    .hero {
+        min-height: 100vh;
+        padding: var(--spacing-xl) var(--spacing-lg);
+        padding-top: calc(var(--spacing-xl) + 56px);
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+        margin-bottom: var(--spacing-md);
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+        margin-bottom: var(--spacing-md);
+    }
+
+    .hero-cta {
+        flex-direction: row;
+        justify-content: center;
+        gap: var(--spacing-sm);
+    }
+
+    .hero-cta .btn {
+        width: auto;
+        min-width: 160px;
+    }
+
+    /* Compact sections for landscape */
+    section {
+        padding: var(--spacing-xl) var(--spacing-lg);
+    }
+
+    /* Optimize grid layouts for landscape */
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-md);
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--spacing-md);
+    }
+
+    .pricing-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .testimonials-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ===================================
+   Mobile Performance Optimizations
+   =================================== */
+
+/* Optimize animations for mobile devices */
+@media (max-width: 768px) {
+    /* Disable expensive animations on mobile */
+    .feature-icon,
+    .tech-node,
+    .stat-card::before {
+        animation: none !important;
+    }
+
+    /* Reduce transition complexity */
+    * {
+        transition-duration: 0.2s !important;
+    }
+
+    /* Simplify hover effects on mobile (they're touch-based anyway) */
+    .feature-card:hover,
+    .price-card:hover,
+    .testimonial-card:hover,
+    .showcase-card:hover {
+        transform: none;
+    }
+
+    /* Keep only active/tap effects */
+    .feature-card:active,
+    .price-card:active,
+    .testimonial-card:active {
+        transform: scale(0.98);
+        transition: transform 0.1s ease;
+    }
+
+    /* Disable backdrop filter on older mobile devices for performance */
+    @supports not (backdrop-filter: blur(20px)) {
+        .nav-menu {
+            background: rgba(251, 251, 253, 0.98);
+            backdrop-filter: none;
+        }
+    }
+}
+
+/* High-resolution mobile displays */
+@media (max-width: 768px) and (-webkit-min-device-pixel-ratio: 2),
+       (max-width: 768px) and (min-resolution: 192dpi) {
+    /* Optimize for retina mobile displays */
+    .hero-image,
+    .showcase-img {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+    /* Remove hover effects for touch devices */
+    .btn:hover,
+    .feature-card:hover,
+    .price-card:hover,
+    .nav-menu a:hover {
+        transform: none;
+    }
+
+    /* Add tap highlight */
+    .btn,
+    .nav-menu a,
+    .feature-card,
+    .price-card {
+        -webkit-tap-highlight-color: rgba(59, 130, 246, 0.1);
+    }
+
+    /* Improve button feedback on touch */
+    .btn:active {
+        transform: scale(0.97);
+        transition: transform 0.1s ease;
+    }
+}
+
+/* Small mobile screens with notches (iPhone X and similar) */
+@media (max-width: 480px) {
+    .nav-container,
+    .hero,
+    section {
+        padding-left: max(var(--spacing-md), env(safe-area-inset-left));
+        padding-right: max(var(--spacing-md), env(safe-area-inset-right));
+    }
+
+    .hero {
+        padding-top: max(calc(var(--spacing-2xl) + 56px), env(safe-area-inset-top));
     }
 }
 
