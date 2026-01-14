@@ -3,19 +3,156 @@
    =================================== */
 
 :root {
-    /* Colors - Minimalist Palette */
-    --color-primary: #3b82f6;
-    --color-primary-dark: #2563eb;
-    --color-primary-light: #60a5fa;
-    --color-secondary: #1d1d1f;
-    --color-background: #fbfbfd;
-    --color-surface: #ffffff;
-    --color-text-primary: #1d1d1f;
-    --color-text-secondary: #6e6e73;
-    --color-text-tertiary: #86868b;
-    --color-border: #d2d2d7;
-    --color-gradient-start: #0071e3;
-    --color-gradient-end: #4c9ee6;
+    /* ===================================
+       PRIMARY COLORS - Blue (Brand)
+       =================================== */
+    --color-primary-50:  #eff6ff;
+    --color-primary-100: #dbeafe;
+    --color-primary-200: #bfdbfe;
+    --color-primary-300: #93c5fd;
+    --color-primary-400: #60a5fa;
+    --color-primary-500: #3b82f6;  /* Main brand color */
+    --color-primary-600: #2563eb;
+    --color-primary-700: #1d4ed8;
+    --color-primary-800: #1e40af;
+    --color-primary-900: #1e3a8a;
+
+    /* Legacy Support (mapping to new scale) */
+    --color-primary: var(--color-primary-500);
+    --color-primary-dark: var(--color-primary-600);
+    --color-primary-light: var(--color-primary-400);
+
+    /* ===================================
+       SECONDARY COLORS - Slate (Neutrals)
+       =================================== */
+    --color-secondary-50:  #f8fafc;
+    --color-secondary-100: #f1f5f9;
+    --color-secondary-200: #e2e8f0;
+    --color-secondary-300: #cbd5e1;
+    --color-secondary-400: #94a3b8;
+    --color-secondary-500: #64748b;
+    --color-secondary-600: #475569;
+    --color-secondary-700: #334155;
+    --color-secondary-800: #1e293b;
+    --color-secondary-900: #0f172a;
+
+    /* Legacy Support */
+    --color-secondary: var(--color-secondary-800);
+
+    /* ===================================
+       ACCENT COLORS - Emerald, Purple, Rose
+       =================================== */
+    /* Emerald (Success Accent) */
+    --color-accent-emerald-50:  #ecfdf5;
+    --color-accent-emerald-100: #d1fae5;
+    --color-accent-emerald-200: #a7f3d0;
+    --color-accent-emerald-300: #6ee7b7;
+    --color-accent-emerald-400: #34d399;
+    --color-accent-emerald-500: #10b981;
+    --color-accent-emerald-600: #059669;
+    --color-accent-emerald-700: #047857;
+    --color-accent-emerald-800: #065f46;
+    --color-accent-emerald-900: #064e3b;
+
+    /* Purple (Premium Accent) */
+    --color-accent-purple-50:  #faf5ff;
+    --color-accent-purple-100: #f3e8ff;
+    --color-accent-purple-200: #e9d5ff;
+    --color-accent-purple-300: #d8b4fe;
+    --color-accent-purple-400: #c084fc;
+    --color-accent-purple-500: #a855f7;
+    --color-accent-purple-600: #9333ea;
+    --color-accent-purple-700: #7e22ce;
+    --color-accent-purple-800: #6b21a8;
+    --color-accent-purple-900: #581c87;
+
+    /* Rose (Attention Accent) */
+    --color-accent-rose-50:  #fff1f2;
+    --color-accent-rose-100: #ffe4e6;
+    --color-accent-rose-200: #fecdd3;
+    --color-accent-rose-300: #fda4af;
+    --color-accent-rose-400: #fb7185;
+    --color-accent-rose-500: #f43f5e;
+    --color-accent-rose-600: #e11d48;
+    --color-accent-rose-700: #be123c;
+    --color-accent-rose-800: #9f1239;
+    --color-accent-rose-900: #881337;
+
+    /* ===================================
+       SEMANTIC COLORS
+       =================================== */
+    --color-success-light: #d1fae5;
+    --color-success:       #10b981;
+    --color-success-dark:  #047857;
+
+    --color-warning-light: #fef3c7;
+    --color-warning:       #f59e0b;
+    --color-warning-dark:  #d97706;
+
+    --color-error-light: #fee2e2;
+    --color-error:       #ef4444;
+    --color-error-dark:  #dc2626;
+
+    --color-info-light: #dbeafe;
+    --color-info:       #3b82f6;
+    --color-info-dark:  #1d4ed8;
+
+    /* ===================================
+       BACKGROUND COLORS
+       =================================== */
+    --color-background-primary:   #ffffff;
+    --color-background-secondary: #f8fafc;
+    --color-background-tertiary:  #f1f5f9;
+    --color-background-dark:      #1e293b;
+    --color-background-darker:    #0f172a;
+
+    /* Legacy Support */
+    --color-background: var(--color-background-secondary);
+    --color-surface: var(--color-background-primary);
+
+    /* ===================================
+       TEXT COLORS
+       =================================== */
+    --color-text-primary:    #0f172a;
+    --color-text-secondary:  #475569;
+    --color-text-tertiary:   #64748b;
+    --color-text-disabled:   #cbd5e1;
+    --color-text-inverse:    #ffffff;
+    --color-text-link:       #3b82f6;
+    --color-text-link-hover: #2563eb;
+
+    /* ===================================
+       BORDER & DIVIDER COLORS
+       =================================== */
+    --color-border-light:   #f1f5f9;
+    --color-border-default: #e2e8f0;
+    --color-border-medium:  #cbd5e1;
+    --color-border-dark:    #94a3b8;
+    --color-border-focus:   #3b82f6;
+
+    /* Legacy Support */
+    --color-border: var(--color-border-default);
+
+    /* ===================================
+       GRADIENTS
+       =================================== */
+    --gradient-primary: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    --gradient-premium: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+    --gradient-success: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    --gradient-hero: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    --gradient-dark: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+
+    /* Legacy Support */
+    --color-gradient-start: #3b82f6;
+    --color-gradient-end: #2563eb;
+
+    /* ===================================
+       OVERLAYS
+       =================================== */
+    --overlay-light: rgba(255, 255, 255, 0.95);
+    --overlay-medium: rgba(255, 255, 255, 0.7);
+    --overlay-dark: rgba(0, 0, 0, 0.6);
+    --overlay-blur: rgba(251, 251, 253, 0.85);
 
     /* Typography */
     --font-primary: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
